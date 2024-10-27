@@ -8,17 +8,10 @@ use App\Http\Controllers\ClientsController;
 
 use App\Http\middleware\CorsMiddleware;
 
+use App\Http\Controllers\RootController;
+
 Route::middleware([CorsMiddleware::class])->group(function () {
-    Route::get('/', function () {
-        return response()->json([
-            'routes' => 'info',
-            'get /client' => 'find all clients',
-            'get /clients/{id}' => 'find a client by id',
-            'post /clients' => 'create new client',
-            'put /clients' => 'update a client',
-            'delete /clients' => 'delete a client'
-        ]);
-    });
+    Route::get('/', [RootController::class, 'root']);
 
     Route::get('/clients', [ClientsController::class, 'getAllClients']);
 

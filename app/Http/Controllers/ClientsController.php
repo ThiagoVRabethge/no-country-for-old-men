@@ -13,6 +13,15 @@ class ClientsController extends Controller
         return response()->json($clients);
     }
 
+    public function getClientById(Request $request, $id) {
+        $client = Clients::find($id);
+        if ($client) {
+            return response()->json($client);
+        } else {
+            return response()->json(['message' => 'Cliente não encontrado.'], 404);
+        }
+    }
+
     public function postClient(Request $request) {
         $client = new Clients();
         $client->name = $request->input('name');
